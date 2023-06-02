@@ -1,0 +1,823 @@
+\documentclass{article}
+\input{preamble.tex}
+
+\addbibresource{mybib.bib}
+
+\begin{document}
+
+\title{Week 5 : Geometric Satake Part I - Affine Grassmannian}
+
+\author{talk by Jonas Antor, notes by Ken Lee}
+\date{Summer 2023}
+\maketitle
+
+Appendices contain details added after the talk.
+
+\tableofcontents  
+
+% Setup some notation : 
+% \begin{itemize}
+%   \item For $k$-algebra $A$,
+%   $D^\wedge_A , D_A , D_A^\circ$ will denote
+%   $\SPF A\bbrkt{t} , \SPEC A\bbrkt{t} , \SPEC A((t))$.
+%   These are the relative formal disk, disk, punctured disk over $\SPEC A$.
+%   \item 
+% \end{itemize}
+
+Let $G$ be a reductive group over $k = \bC$.
+Recall the rough statement of geometric Satake.
+
+\begin{prop}
+
+  There is an equivalence of tensor abelian categories
+  \[
+    \SPH_G \simeq \REP_\bC G^L
+  \]
+\end{prop}
+
+Here, the spherical Hecke category A.K.A. Satake category is 
+the abelian category of $L^+G$-equivariant 
+(regular holonomic) $D$-modules\footnote{
+  or alternatively, under the Riemann--Hilbert correspondence,
+  perverse sheaves
+} on $\GR_G$.
+\[
+  \SPH_G := (D\MOD_{\text{rh}} \GR_G)^{L^+ G} \simeq
+  (\PERV \GR_G)^{L^+ G}
+\]
+Today we focus on answering these two questions : 
+\begin{enumerate}
+  \item What is the algebro-geometric structure on $\GR_G$?
+  \item How exactly do we work with equivariant $D$-modules on $\GR_G$?
+\end{enumerate}
+
+\section{The structure of the affine Grassmannian}
+
+Recall from the talk in week 4 that
+the affine Grassmannian is (equivalent to) the following set-valued functor 
+\[
+  \GR_G(A) = \set{(P , s) \st 
+    \begin{matrix}
+      \text{$G$-bundle $P$ on $D_A$} \\
+      \text{$s : \res{\TRIV}{D_A^\circ} \simeq \res{P}{D_A^\circ}$}
+    \end{matrix}
+  } / \simeq
+\]
+where
+\begin{itemize}
+  \item $D_A = \SPEC A\bbrkt{t}$
+  \item $D_A^\circ = \SPEC A((t))$
+  \item $\res{\TRIV}{S} = S \times G$ trivial $G$-bundle
+  \footnote{
+    Recall $G$-bundles means fpqc $G$-torsor.
+  }
+\end{itemize}
+Alternatively, we have 
+\[
+  \GR_G \simeq LG / L^+ G
+\]
+where the quotient is as fpqc sheaves.
+
+We will see now that the affine Grassmannian is an \emph{ind-scheme}.
+\begin{dfn}
+  
+  A functor $X \in \PSH \AFF$ is called an ind-scheme
+  when it is a colimit of schemes along closed embeddings.
+\end{dfn}
+
+\begin{prop}
+  
+  $\GR_G$ is an ind-scheme.
+  Moreover, we can write $\GR_G \simeq \COLIM_{N \in \bN} X_N$ where
+  \begin{enumerate}
+    \item $X_N$ is projective schemes over $k$
+    \item transition maps are closed embeddings
+    \item each $X_N$ is $L^+G$ stable
+    \item The action of $L^+G$ on $X_N$ factors through some
+    $L^M G$ for sufficiently large $M$.
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  ($G = \GL_n$ case)
+  In this case we have equivalence between groupoids of 
+  \begin{itemize}
+    \item $\GL_n$-bundles on $D_A$
+    \item rank $n$ vector bundles on $D_A$
+    \item rank $n$ projective modules over $A\bbrkt{t}$
+  \end{itemize}
+  This allows us to make the following simplicification of 
+  $\GR_{\GL_n}$ : 
+  it is isomorphic to the functor
+  \[
+    A \mapsto \text{
+    set of $A\bbrkt{t}$-lattices in $A((t))^n$
+  }
+  \]
+  See \nameref{appendix:1}.
+  
+  Let $\La_0$ be the standard lattice $A\bbrkt{t}^n$ in $A((t))^n$.
+  Then for any $A\bbrkt{t}$-lattice $\La$ one can find $N \leq 0$ such that 
+  \[
+    t^N \La_0 \subs \La \subs t^{-N}\La_0
+  \]
+  This condition defines a subfunctor $\GR_{\GL_n}^{(N)}$ for each $N$
+  and we have \[
+    \GR_{\GL_n} \simeq \COLIM_{N} \GR_{\GL_n}^{(N)}
+  \]
+  We choose $X_N = \GR_{\GL_n}^{(N)}$ for the result.
+
+  Proof of (1) :
+  \begin{itemize}
+    \item Idea : each $\La \in \GR_{\GL_n}^{(N)}(A)$ gives
+    a subspace 
+    \[
+      0 \to \La / t^N \La_0 \to t^{-N} \La_0 / t^N \La_0 \simeq A^{2nN}
+    \]
+    So $\La$ should give an $A$-point in the usual Grassmannian $\GR(2nN)$.
+    \item Issue : $\GR(2nN)(A) =$ set of direct summands of $A^{2nN}$.
+    \item Fix : we show that $\La / t^N \La_0$ has a complement in
+    $t^{-N} \La_0 / t^N \La_0$.
+    It suffices to show 
+    \[
+      \frac{t^{-N} \La_0 / t^N \La_0}{\La / t^N \La_0} \simeq
+      \frac{t^{-N}\La_0}{\La}
+    \]
+    is projective over $A$.
+    This fits in an SES : 
+    \[
+      0 \to \frac{t^{-N}\La_0}{\La} \to
+      \frac{A((t))^n}{\La} \to \frac{A((t))^n}{t^{-N}\La_0} \to 0
+    \]
+    It suffices to show the right two modules are projective $A$-modules.
+    The right-most module is free over $A$.
+    For the middle module, we have 
+    \[
+      \frac{A((t))^n}{\La} = \frac{\bigcup_{0 \leq k} t^{-k} \La}{\La}
+      \simeq \bigoplus_{0 \leq k} \frac{t^{-(k+1)}\La}{t^{-k}}
+      \simeq \bigoplus_{0 \leq k} \frac{\La}{t \La}
+    \]
+    where the first isomorphism uses the fact that
+    $\La / t \La$ is projective over $A$.
+
+  \end{itemize}
+
+  Proof of (2) :
+  The above defines a map $\GR_{\GL_n}^{(N)} \to \GR(2nN)$
+  which is injective,
+  which we need to show is a closed embedding.
+  This follows from the observation that subspaces of $t^{-N}\La_0 / t^N\La_0$ 
+  of the form $\La / t^N \La_0$ are precisely those
+  which are stable under the action of $t$.
+  If we use $t$ again to denote the corresponding 
+  $A$-linear endomorphism on $A^{2nN}$ 
+  under $A^{2nN} \simeq t^{-N}\La_0 / t^N\La_0 \simeq A^{2nN}$,
+  then we have
+  \[
+    \GR_{\GL_n}^{(N)}(A) \simeq \set{M \in \GR(2nN)(A) \st t M \subs M}
+  \]
+  The condition $tM \subs M$ is equivalent to $(M + t M) / M = 0$
+  which defines a closed subscheme of $\SPEC A$.
+  This shows $\GR_{\GL_n}^{(N)} \to \GR(2nN)$ is a closed embedding,
+  and hence a projective scheme over $k$.
+
+  Proof of (3) :
+  Elements $g \in L^+\GL_n(A) = \GL_n(A\bbrkt{t})$ stabilise 
+  the standard lattice $\La_0 = A\bbrkt{t}^n$.
+  It follows that for any $\La \in \GR_{\GL_n}^{(N)}(A)$, 
+  $g \La$ is still in $\GR_{\GL_n}^{(N)}(A)$.
+
+  Proof of (4) :
+  Recall that $L^M G(A) = G (A[t] / (t^{M+1}))$.
+  The kernel of $L^+ \GL_n (A)\to L^M \GL_n (A)$ consists of
+  elements of the form $1 + t^{M + 1} A$ with 
+  $A \in M_{n \times n}(A\bbrkt{t})$.
+  So the action of $L^+ G$ on $X_N$ factors through $L^M G$
+  if and only if all $1 + t^{M + 1} A$ act trivially on 
+  any points of $X_N$.
+  We claim that $M + 1 = 2N$ works.
+  It suffices to show $(1 + t^{2N}A) \La \subs \La$ for
+  any $\La \in X_N$.
+  This follows from 
+  \[
+    (1 + t^{2N} A) \La \subs \La + t^{2 N} A t^{-N} \La_0
+    \subs \La + t^{N} \La_0 \subs \La
+  \]
+
+  (General reductive $G$)
+  One can show that $\GR_G$ is ind-projective using the following argument :
+  There exists $i : G \to \GL_n$ a closed embedding with
+  affine homogeneous space $\GL_n / G$ of finite type.
+  \footnote{
+      All algebraic groups admit a closed embedding
+      $G \to \GL_n$ for some $n$.
+      \cite[Theorem 4.8]{milne}
+      The fact that the quotient $\GL_n / G$ must be affine finite type
+      is Matsushima's criterion.
+  }
+  To show $\GR_G$ is ind-projective,
+  it suffices to show the induced functor $\GR_G \to \GR_{\GL_n}$
+  is a closed embedding.
+  See \nameref{appendix:2}.
+  
+\end{proof}
+
+
+% \begin{enumerate}
+%   \item $D_S := \SPEC \cO(S)\bbrkt{t}$. 
+%   $G$-bundle on $D_S$ equivalent to monoidal, exact, faithful continuous
+%   functor $\QCOH(\PT / G) \to \QCOH D_S$,
+%   equivalently monoidal exact faithful $\PERF (\PT / G) \to \QCOH D_S$.
+%   \item Monoidal preserves dualizable.
+%   Hence equivalent to monoidal exact faithful $\PERF (\PT / G) \to \PERF D_S$.
+%   \item For finite type $S$, $\COH D_S \simeq \COH D_S^\wedge$.
+%   \cite[\href{https://stacks.math.columbia.edu/tag/087W}{Lemma 30.23.1}]{stacks-project}
+%   One can check that $M \in \COH D_S$ corresponding to 
+%   $(M_n)_n \in \COH D_S^\wedge$ is projective
+%   iff each $M_n$ is projective.
+%   So $G$-bundle on $D_S$ is equivalent to
+%   monoidal exact faithful functor
+%   $\PERF (\PT / G) \to \COH D_S^\wedge$ landing in
+%   level-wise projective objects.
+
+% \end{enumerate}
+
+\section{Schubert varieties and cells}
+
+This section is roughly based on \cite[Section 2.1]{Zhu-17}.
+
+To define and study $L^+G$-equivariant $D$-modules on $\GR_G$,
+we need to understand the $L^+G$-orbits (of $k$-valued points).
+But we know that for a finite type scheme $X$, 
+\[
+  D\MOD(X) \map{\sim}{} D\MOD(X_\RED)
+\]
+so as far as $D$-modules are concerned,
+we can work with $(\GR_G)_{\RED} = \COLIM_{n} (X_n)_\RED$ instead.
+This is now an ind-variety\footnote{
+  where variety means reduced, separated, finite type scheme over $k$
+}
+and hence we can work at the level of $k$-valued points.
+We have\footnote{
+  We showed in week 5 that $\GR_G = LG / L^+G$ where the quotient
+  is as fpqc sheaves, so it does not
+  immediately follow that $\GR_G(k) = LG(k) / L^+G(k)$.
+  However, this is nonetheless true because $G$-bundles on $D_k$
+  can be trivialised without passing through $D_S \to D_k$ 
+  via an fpqc cover $S \to \SPEC k$.
+}
+\[
+  (\GR_G)_\RED(k) = \GR_G(k) \simeq LG(k) / L^+G(k) = G(k((t))) / G(k\bbrkt{t})
+\]
+
+The $L^+G(k)$-orbits of $\GR_G(k)$ are given by the \emph{Cartan decomposition}.
+Begin by choosing a maximal torus\footnote{
+  automatically split because $k$ is algebraically closed
+} and Borel $T \subs B \subs G$
+and let $W := N(T) / T$ be the Weyl group.
+Recall the coweight lattice of $T$ \[
+  \mathbf{X}_\bullet(T) := \HOM(\bG_m , T)
+\]
+For any $F / k$ algebraically closed,
+\begin{align*}
+  \mathbf{X}_\bullet(T) &\to LG(F) \\
+  \la &\mapsto t^\la := \la(t)
+\end{align*}
+
+\begin{prop}[Cartan decomposition]
+
+  For $F / k$ algebraically closed,
+  we have the isomorphism\footnote{
+    Note that this isomorphism is functorial in $F$.
+  }
+  \[
+    \mathbf{X}_\bullet(T)^+ \simeq 
+    \mathbf{X}_\bullet(T) / W \simeq L^+G(F) \backslash LG(F) / L^+G(F)
+  \]
+\end{prop}
+
+\begin{dfn}[Schubert cell, variety]
+  
+  For $\la \in \mathbf{X}_\bullet(T)^+$,
+  the associated Schubert cell is defined as 
+  \[
+    \GR_G^\la := \text{ $L^+G(k)$-orbit of $t^\la$}
+  \]
+  and the associated Schubert variety is defined the Zariski closure 
+  $\bar{\GR_G^\la}$.
+\end{dfn}
+
+\begin{prop}[Properties of Schubert cells and varieties]
+
+  The following are true :
+  \begin{enumerate}
+    \item $\GR_G^\la \to \GR_G$ is locally closed variety
+    \item $\bar{\GR_G^\la}$ is a projective variety
+    \item For all $x \in \GR_G(k)$, $\mathrm{Stab}_{L^+G}(x)$ is connected
+    \item $\dim \GR_G^\la = (2\rho , \la)$ 
+    \item $\bar{\GR_G^\la} = \bigcup_{\mu \leq \la} \GR_G^\mu$
+    \item The connected components of $\GR_G$ are 
+    \[
+      \bigcup_{\mu \in \om} \GR_G^\mu
+      \text{ where $\om \in \mathbf{X}_\bullet(T) / \bZ\Phi^\vee$}
+    \]
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  
+  Recall that we could write $\GR_G = \COLIM_{n} X_n$ where
+  the transition maps are closed embeddings and
+  each $X_n$ is a $L^+G$-stable projective variety with
+  $L^+G$ acting through a finite type quotient.
+  For $\la \in \mathbf{X}_\bullet(T)^+$,
+  $t^\la \in \GR_G(k)$ must lie in some $X_n$
+  and hence $\GR_G^\la \subs X_n$ in that $X_n$.
+  (1) and (2) now follow from \cite[Prop. 9.4]{milne}.
+
+  (6) follows from (5).
+  The proof of (3), (4), (5) was omitted in the talk
+  but can be found at \cite[Prop. 2.1.5]{Zhu-16}.
+
+\end{proof}
+
+\section{Equivariant $D$-modules}
+
+We recall some facts about $D$-modules on 
+a smooth variety $X$ over $k = \bC$.
+
+\begin{enumerate}
+  \item We have the Riemann--Hilbert correspondence 
+  \cite[Theorem 7.2.2]{HTT}
+  \begin{cd}
+    & {D^b_{rh}(D_X)} & {D^b_c(X^{\text{an}})} \\
+    {D\MOD_{rh}(X)} & {{D^b_{rh}(D_X)}^{\heartsuit}} 
+    & {D^b_c(X^{\text{an}})^{\heartsuit}} & {\PERV(X^\text{an})}
+    \arrow["\simeq"{description}, draw=none, from=1-3, to=1-2]
+    \arrow[from=2-2, to=1-2]
+    \arrow[from=2-3, to=1-3]
+    \arrow["\simeq"{description}, draw=none, from=2-2, to=2-3]
+    \arrow["\simeq"{description}, draw=none, from=2-1, to=2-2]
+    \arrow["{=:}"{description}, draw=none, from=2-4, to=2-3]
+  \end{cd}
+  The LHS is the derived category of complexes of $D$-modules
+  with bounded cohomologies which are all regular holonomic.
+  The RHS is the derived category of complexes of $\bC$-valued sheaves 
+  with respect to the analytic topology on $X$,
+  with bounded cohomologies which are all constructible.
+  The $t$-structure on the LHS is the standard one and
+  it identifies with the perverse $t$-structure on the right.
+  For this study group, we are using the $D$-modules side,
+  but Jonas is secretly using perverse sheaves so 
+  to be safe, we will assume all $D$-modules are regular holonomic.
+  \footnote{
+    Holonomicity and regularity can be see as finiteness conditions
+    \cite[Theorem 3.3.1, Definition 6.1]{HTT}.
+  }
+  \item There are six derived functors $f^!, f_! , f_* , f^*, \otimes, \HOM$
+  on the $D^b(D_X)$.
+  In general, none of these preserve the heart $D\MOD(\_)$.
+  We list some special cases.
+  \begin{itemize}
+    \item If $i$ is a closed embedding, 
+  then $i_* = i_!$ preserves $D\MOD(\_)$.
+  \item If $j$ is an open embedding, 
+  then $j^* = j^!$ preserves $D\MOD(\_)$.
+  \item If $f$ is smooth of relative dimension $d$,
+  then $f^\dagger := f^*[d] = f^![-d]$ preserves $D\MOD(\_)$
+  \end{itemize}
+\end{enumerate}
+
+Recall from the previous talk that
+given an algebraic group $H$ acting on $X$
+we can consider the category $(D\MOD X)^H$ 
+of (strongly) $H$-equivariant $D$-modules on $X$.
+Given a morphism $H^\prime \to H$ of algebraic groups,
+we have a restriction functor 
+\[
+  \mathrm{Res}^{H}_{H^\prime} : (D\MOD X)^{H} \to (D\MOD X)^{H^\prime}
+\]
+Concretely, 
+$H^\prime \to H$ induces a map of the action groupoid of $H^\prime$ on $X$
+to that of $H$, allowing restriction of $H$-equivariance
+to $H^\prime$-equivariance.
+For the example of $H^\prime = 1 \to H$,
+we obtain the ``forgetful functor''
+\[
+  (D\MOD X)^H \to D\MOD X
+\]
+This is fully faithful when $H$ is connected.
+\cite[Lem. A.1.2]{Zhu-16}
+
+We have some further properties : 
+\begin{enumerate}
+  \item $i_* = i_! , j^* = j^! , f^\dagger$ still make sense 
+  for (strongly) equivariant (regular holonomic) $D$-modules.
+  \item
+  Given $N \trianglelefteq H$ normal closed subgroup
+  acting trivially on $X$,
+  then 
+  \[
+    (D\MOD X)^{H / N} \map{\sim}{} (D\MOD X)^H
+  \]
+  \item Given $N \trianglelefteq H$ normal closed subgroup
+  such that $N$ acts freely on $X$ and the fpqc quotient $X / N$
+  is in fact an algebraic space,
+  then 
+  \[
+    (D\MOD X / N)^{H / N} \map{\sim}{} (D\MOD X)^H
+  \]
+
+\end{enumerate}
+
+From the above, we can show that
+$H$-equivariant $D$-modules on homogeneous spaces of $H$
+are very simple.
+\begin{prop}
+
+  Let $X$ be a homogeneous space for $H$ such that
+  the stabilisers for $x \in X(k)$ are connected.
+  \footnote{
+    You only need one to be connected for all to be connected.
+  }
+  Then \[
+    (D\MOD X)^H \simeq \VEC^{\text{f.d.}}_k
+  \]
+\end{prop}
+\begin{proof}
+  Pick $x \in X(k)$. Then $X \simeq H / H_x$.
+  Then 
+  \[
+    (D\MOD X)^H \overset{(3)}{\simeq}
+    (D\MOD H)^{H \times H_x} \overset{(3)}{\simeq}
+    (D\MOD H/H)^{H_x} \simeq
+    (D\MOD \PT)^{H_x} \overset{(2)}{\simeq}
+    D\MOD \PT \simeq \VEC^{\text{f.d.}}_k
+  \]
+\end{proof}
+This can be applied inductively using \emph{recollement} 
+\cite[Exercises A.7.4 to A.7.7]{A21} to obtain the following :
+\begin{prop}
+
+  Let $H$ act on $X$ with finitely many orbits and
+  suppose the stabiliser of all $x \in X(k)$ are connected.
+  Then 
+  \begin{align*}
+    \text{$H$-orbits in $X$ } &\longleftrightarrow 
+      \text{ Simples in $(D\MOD X)^H$} \\
+    Hx &\mapsto \mathrm{IC}_{Hx}
+  \end{align*}
+  where $\mathrm{IC}_{Hx}$ is such that 
+  \begin{itemize}
+    \item $\supp \mathrm{IC}_{Hx} = \overline{Hx}$
+    \item $\res{\mathrm{IC}_{Hx}}{Hx} \simeq \cO_{Hx}$ where
+    restriction means $*$-pullback.
+  \end{itemize}
+\end{prop}
+The definition of $\mathrm{IC}_{Hx}$ can be found in
+\cite[Section 3.3]{A21}.
+
+\section{$D$-modules on ind-varieties}
+
+The situation is $X$ is a ind-variety with an action from
+a pro-algebraic group $H$.
+We require a presentation $X \simeq \COLIM_{i \in I} X_i$
+where $X_i$ is $H$-stable and $H$ acts through a finite type quotient $H_i$.
+
+Our desired situation is $X = \GR_{\GL_n}$,
+$H = L^+\GL_n$, $X_i = \GR_G^{(i)}$ and $H_i = L^N\GL_n$ for large enough $N$.
+
+We now define 
+\[
+  (D\MOD X_i)^H := (D\MOD X_i)^{H_i}
+\]
+Property (2) from the previous section ensures this is
+independent of $H_i$ up to equivalence of categories.
+We can now define
+\[
+  (D\MOD X)^H := \COLIM_{i} (D\MOD X_i)^H
+\]
+where
+\begin{itemize}
+  \item the objects are $(i, \cF_i)$ where $\cF_i \in (D\MOD X_i)^H$
+  \item morphisms $(i , \cF_i) \to (j , \cF_j)$ are
+  morphisms $\al_* \cF_i \to \be_* \cF_j$ where
+  \[
+    X_i \overset{\al}{\to} X_k \overset{\be}{\leftarrow} X_j
+  \]
+  This is well-defined because $*$-pushfoward is fully faithful along
+  closed embeddings.
+\end{itemize}
+This category is independent of the presentation of $X$
+up to equivalence.
+Finally, we now have a definition of the spherical Hecke category.
+\footnote{
+  Thought to myself : 
+  the collection of Schubert varieties indexed by $\mathbf{X}_\bullet(T)^+$
+  should be a more canonical presentation of $\GR_G$
+  than the one provided by $\GR_G \to \GR_{\GL_n}$.
+  The issue is that this is really a presentation of $(\GR_G)_\RED$ not 
+  $\GR_G$.
+  But after speaking with Jonas,
+  this seems to be a non-issue because 
+  $D\MOD(X) \simeq D\MOD(X_\RED)$.
+}
+\begin{dfn}
+
+  $\SPH_G := (D\MOD \GR_G)^{L^+ G}$
+\end{dfn}
+
+Given a closed subvariety $X$ of $\GR_G$ which is $L^+G$-stable,
+it must be a union
+\[
+  X = \bigcup_{\la \in S} \GR_G^\la
+\]
+for some finite $S \subs \mathbf{X}_\bullet(T)^+$
+because $X$ is finite dimensional and 
+$\GR_G^\la$ have arbitrarily large dimension for larger $\la$.
+It follows that $L^+G$ acts on $X$ through a finite type quotient
+so $(D\MOD X)^{L^+G}$ makes sense.
+Then we have a bijection
+\[
+  S \leftrightarrow \set{\text{ simples in $(D\MOD X)^{L^+G}$}}
+\]
+Since any $\cF \in (D\MOD \GR_G)^{L^+G}$ is supported on some
+closed subvariety $X$ of $\GR_G$,
+we deduce
+\begin{prop}
+
+  There is a bijection 
+  \begin{align*}
+    \mathbf{X}_\bullet(T)^+ &\longleftrightarrow 
+      \set{\text{ simples in $(D\MOD \GR_G)^{L^+ G}$}} \\
+    \la &\mapsto \mathrm{IC}_\la := \mathrm{IC}_{\GR_G^\la}
+  \end{align*}
+\end{prop}
+
+TODO :
+\begin{itemize}
+  \item the technical issues with defining convolution
+  \item the fix
+  \item the sketch of proof that $\SPH_G$ is semi-simple
+\end{itemize}
+
+\section{Appendix : Affine Grassmannian for $\GL_n$}
+\label{appendix:1}
+
+\begin{lem}
+
+  The affine Grassmannian for $\GL_n$ is isomorphic
+  to the set-valued functor 
+  \[
+    A \mapsto \text{
+    set of $A\bbrkt{t}$-lattices in $A((t))^n$
+  }
+  \]
+where an $A\bbrkt{t}$-lattice in $A((t))^n$ is defined as
+a $A\bbrkt{t}$ submodule $\La$ of $A((t))^n$ which is
+\begin{enumerate}
+  \item finitely generated projective over $A\bbrkt{t}$
+  \item the inclusion $\La \subs A((t))^n$
+  induces $\La \otimes_{A\bbrkt{t}} A((t)) \simeq A((t))^n$
+\end{enumerate}
+\begin{proof1}
+  Let $\GR_{\GL_n}^\prime$ denote our target functor.
+Let $\La$ be an $A$-family of lattices in $A((t))^n$.
+Then $\La$ is a rank $n$ vector bundle on $D_A$.
+The fact that the inclusion $\La \to A((t))^n$ induces
+$\La \otimes_{A\bbrkt{t}} A((t)) \simeq A((t))^n$
+supplies a trivialisation of $\res{\La}{D_S^\circ}$.
+This defines $\GR_{\GL_n} \to \GR_{\GL_n}^\prime$.
+
+Conversely, suppose we are given a rank $n$ vector bundle $M$ over $D_A$
+and a trivialisation $s$ of $M$ over $D_A^\circ$.
+Goal : give an $A\bbrkt{t}$-lattice $M$ in $A((t))^n$.
+It suffices to show 
+\[
+  M \to M \otimes_{A\bbrkt{t}} A((t)) , m \mapsto m \otimes 1
+\]
+is an injective morphism of $A\bbrkt{t}$ modules
+since the image of $M$ under $s : M \otimes_{A\bbrkt{t}} A((t)) \simeq A((t))^n$
+gives an $A\bbrkt{t}$-lattice in $A((t))^n$.
+We have a SES of $A\bbrkt{t}$ modules.
+\[
+  0 \to A\bbrkt{t} \to A((t)) \to Q \to 0  
+\]
+We reach our goal by applying $M \otimes_{A\bbrkt{t}} \_$ and
+projectivity of $M$.
+This defines $\GR_{\GL_n}^\prime \to \GR_{\GL_n}$.
+
+We omit checking these are mutual inverses.
+\end{proof1}
+\end{lem}
+
+\section{Appendix : Ind-projectivity of $\GR_G$ for general $G$}
+\label{appendix:2}
+
+  Goal : given an affine $S$ and a point $(P , s) : S \to \GR_{\GL_n}$,
+  we need to show the right vertical morphism 
+  \begin{cd}
+    {\GR_G} & {?} \\
+    {\GR_{\GL_n}} & S
+    \arrow[from=1-1, to=2-1]
+    \arrow[from=2-2, to=2-1, "{(P,s)}"]
+    \arrow[from=1-2, to=1-1]
+    \arrow[from=1-2, to=2-2]
+    \arrow["\lrcorner"{anchor=center, pos=0.125, rotate=-90}, draw=none, from=1-2, to=2-1]
+  \end{cd}
+  is a closed embedding.
+  By looking at the points of the fiber product in question,
+  one sees that one needs to understand more about reductions
+  of bundles,
+  leading one to the following lemma :
+  \begin{lem}
+    
+    Let $G_1 \to G_2$ be a closed subgroup inclusion of
+    algebraic groups and
+    and $X$ a functor acted on by $G_2$.
+    Then we have a cartesian square : 
+    \begin{cd}
+      {X / G_1} & {\PT / G_1} \\
+      {X/G_2} & {\PT / G_2}
+      \arrow[from=1-1, to=1-2]
+      \arrow[from=1-1, to=2-1]
+      \arrow[from=2-1, to=2-2]
+      \arrow[from=1-2, to=2-2]
+      \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+    \end{cd}
+    \begin{proof1}
+      We only sketch comparison functors.
+      \footnote{
+        Note to self:
+        actually I don't know where I used
+        the fact that $G_1 \to G_2$ is a closed embedding.
+      }
+      A point of $X / G_1$ is a diagram 
+      \begin{cd}
+        P & X \\
+        S
+        \arrow["{G_1\text{-bundle}}"', from=1-1, to=2-1]
+        \arrow["{G_1\text{-equiv}}", from=1-1, to=1-2]
+      \end{cd}
+      The map $X / G_1 \to \PT / G_1$ forgets the map $P \to X$.
+      The map $X / G_1 \to X / G_2$ takes the above such diagrams to
+      \begin{cd}
+        {P \times^{G_1} G_2} & X \\
+        S
+        \arrow["{G_2\text{-bundle}}"', from=1-1, to=2-1]
+        \arrow["{G_2\text{-equiv}}", from=1-1, to=1-2]
+      \end{cd}
+      The above defines a morphism 
+      $X / G_1 \to (X / G_2) \times_{\PT / G_2} (\PT / G_1)$.
+
+      We construct an inverse.
+      A point of the fiber product is the data of
+      an affine $S$, a $G_1$-bundle $P_1$ on $S$,
+      a $G_2$-bundle $P_2$ on $S$,
+      a $G_2$-equivariant map $P_2 \to X$ and
+      an isomorphism of $G_2$-bundles $P_1 \times^{G_1} G_2 \simeq P_2$.
+      Given this, we make the diagram 
+      \begin{cd}
+        {P_1} & {P_1 \times^{G_1} G_2} & {P_2} & X \\
+        S
+        \arrow["{G_2\text{-equiv}}", from=1-3, to=1-4]
+        \arrow["\sim", from=1-2, to=1-3]
+        \arrow["{G_1\text{-equiv}}", from=1-1, to=1-2]
+        \arrow["{G_1\text{-bundle}}"', from=1-1, to=2-1]
+      \end{cd}
+    \end{proof1}
+  \end{lem}
+  Applying to our situation $G_1 = G , G_2 = \GL_n, X = P$
+  shows that the groupoid of $G$-reductions of $P$
+  is equivalent to the groupoid of sections of 
+  $P / G \to D_S$.
+  \footnote{
+    The degenerate case of $G_1 = 1 , G_2 = G$
+    says that a reduction of a $G$-bundle to a $1$-bundle
+    is the same thing as a global section.
+  }
+
+  Now we can describe the points of the fiber product in question.
+  First, see $s$ as a section of $\res{P}{D_S^\circ}$.
+  Then given any affine $t : T \to S$ over $S$,
+  then $s$ gives rise to a section $s_t$ of the pullback $P_t$
+  to $D_T$ over $D_T^\circ$.
+  \begin{cd}
+    {(P_t)^\circ} & {P_t} \\
+    {(P_t)^\circ / G} & {P_t / G} \\
+    {D_T^\circ} & {D_T}
+    \arrow[from=1-2, to=2-2]
+    \arrow[from=1-1, to=2-1]
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=3-1, to=3-2]
+    \arrow[from=2-1, to=2-2]
+    \arrow[from=2-1, to=3-1]
+    \arrow[from=2-2, to=3-2]
+    \arrow["{s_t}", bend left, from=3-1, to=1-1]
+  \end{cd}
+  Since $s_t$ trivialises $P_t^\circ$,
+  it also provides a $G$-reduction of $P_t^\circ$.
+  The question is : what are all the extensions of
+  this $G$-reduction to all of $D_T$?
+  Using the above lemma, 
+  this is equivalent to asking for the
+  groupoid of sections of $P_t / G$ extending $s_t$ 
+  from $D_T^\circ$ to $D_T$.
+  Note that the data of extending $s_t$ means
+  this groupoid is discrete.
+  Another way of seeing $P_t / G$ is
+  as $P \times^{\GL_n} (\GL_n / G)$.
+  By our assumption of $\GL_n / G$ being affine and finite type,
+  it follows that $P_t / G$ is relatively affine and finite type over $D_T$.
+  We can thus give a closed embedding 
+  \begin{cd}
+    {P_t / G} & {\bA^N_{D_T}} \\
+    {D_T}
+    \arrow[from=1-1, to=2-1]
+    \arrow[from=1-2, to=2-1]
+    \arrow["{\text{c.emb.}}", from=1-1, to=1-2]
+  \end{cd}
+  for some large $N$.
+  The section $s_t$ of $P_t / G$ over $D_T^\circ$ can be seen as the data
+  \[
+    s_t = (s_t^1 , \dots , s_t^N) \in (\cO(T)((z)))^N
+  \]
+  One sees now that the locus of points of $D_T$
+  admitting extensions of $s_t$ is given by
+  the vanishing of the polar terms in the Laurent expansions of
+  the coordinates of $s_t$.
+  Furthermore, any extension is unique.
+  We have thus shown that the fiber product in question
+  is a close subscheme of $S$.
+
+\section{Appendix : Schematic definition of Schubert cells and varieties}
+
+The following is my understanding on how to define
+the Schubert cells and varieties schematically
+without working at the level of $k$-valued points.
+As discussed with Jonas, 
+since $D$-modules do not see the difference between
+schemes and their reduction,
+this is purely aesthetical.
+
+\begin{dfn}
+
+  Let $F / k$ be algebraically closed.
+  Let $P_0, P_1$ be $G$-bundles on $D_F$ and 
+  $\be : \res{P_0}{D_F^\circ} \to \res{P_1}{D_F^\circ}$.
+  Given trivialisations $s_i$ of $P_i$ on $D_F$,
+  one obtains an automorphism
+  $s_1^{-1} \be s_0$ of $\res{\TRIV}{D_F^\circ}$,
+  equivalently an element of $LG(F)$.
+  Quotienting by the choice of trivialisations,
+  we obtain a well-defined element 
+  \[
+    \INV(\be) \in L^+G(F) \backslash LG(F) / L^+G(F) \simeq 
+    \mathbf{X}_\bullet(T)^+
+  \]
+  This is called the \emph{relative position of $\be$}.
+
+  For $F$ not necessarily algebraically closed,
+  one can choose an algebraic closure $\bar{F} / F$ and define
+  $\INV(\be)$ by first base changing along $D_{\bar{F}} \to D_F$
+  when do it over $D_{\bar{F}}$.
+  The resulting element of $\mathbf{X}_\bullet(T)^+$
+  is independent of the choice of $\bar{F}$ by the Cartan decomposition.
+
+  Now let $\SPEC R$ be an affine scheme and
+  $(P , s) \in \GR_G(R)$.
+  For a topological point $x \in \SPEC R$,
+  define 
+  \[
+    \INV_x s := 
+    \text{ relative difference of }
+    P_{D_{\ka(x)}}
+     \map{s}{}
+    \TRIV_{D_{\ka(x)}}
+    \text{ over $D_{\ka(s)}^\circ$}
+  \]
+  For each $\mu \in \mathbf{X}_\bullet(T)^+$,
+  we now define the Schubert variety 
+  associated to $\mu$
+  as a subfunctor of $\GR_G$ by the formula
+  \[
+    \GR_G^{\leq \mu} (R) := 
+    \set{(P , s) : \forall\, x \in \SPEC R , \INV_x s \leq \mu}
+  \]
+  We also define the Schubert cell of $\mu$ as
+  \[
+    \GR_G^\mu := \GR_G^{\leq \mu} \setminus \bigcup_{\la < \mu} \GR_G^{\leq \la}
+  \]
+
+\end{dfn}
+
+At this point, one should be able to either show
+that $\GR_G^\la$ and $\GR_G^{\leq \la}$ have reductions giving
+back the definition in the talk,
+and maybe even show that these are reduced already.
+But I have not had the time to think about this nor
+have I found a reference.
+
+
+
+\printbibliography
+
+\end{document}

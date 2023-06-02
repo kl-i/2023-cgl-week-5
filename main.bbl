@@ -1,0 +1,155 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.0 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global}
+    \entry{A21}{book}{}
+      \name{author}{1}{}{%
+        {{hash=4151b5e5efa2e9267ec54c1c223b0313}{%
+           family={Achar},
+           familyi={A\bibinitperiod},
+           given={P.N.},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Mathematical Society}%
+      }
+      \strng{namehash}{4151b5e5efa2e9267ec54c1c223b0313}
+      \strng{fullhash}{4151b5e5efa2e9267ec54c1c223b0313}
+      \strng{bibnamehash}{4151b5e5efa2e9267ec54c1c223b0313}
+      \strng{authorbibnamehash}{4151b5e5efa2e9267ec54c1c223b0313}
+      \strng{authornamehash}{4151b5e5efa2e9267ec54c1c223b0313}
+      \strng{authorfullhash}{4151b5e5efa2e9267ec54c1c223b0313}
+      \field{labelalpha}{A21}
+      \field{sortinit}{A}
+      \field{sortinithash}{d77c7cdd82ff690d4c3ef13216f92f0b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781470455972}
+      \field{series}{Mathematical Surveys and Monographs}
+      \field{shorthand}{A21}
+      \field{title}{Perverse Sheaves and Applications to Representation Theory}
+      \field{year}{2021}
+      \verb{urlraw}
+      \verb https://books.google.co.uk/books?id=8-J9zgEACAAJ
+      \endverb
+      \verb{url}
+      \verb https://books.google.co.uk/books?id=8-J9zgEACAAJ
+      \endverb
+    \endentry
+    \entry{HTT}{book}{}
+      \name{author}{3}{}{%
+        {{hash=34da163046465e6a62ceb34ba3384f42}{%
+           family={Hotta},
+           familyi={H\bibinitperiod},
+           given={Ryoshi},
+           giveni={R\bibinitperiod}}}%
+        {{hash=aa6eade6441993ee7e01fdd35496598a}{%
+           family={Takeuchi},
+           familyi={T\bibinitperiod},
+           given={Kiyoshi},
+           giveni={K\bibinitperiod}}}%
+        {{hash=486d52cfce814e735994df407bc54c96}{%
+           family={Tanisaki},
+           familyi={T\bibinitperiod},
+           given={Toshiyuki},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Science \& Business Media}%
+      }
+      \strng{namehash}{2a131e0a06f9f3fb3155ab8e63ee5dac}
+      \strng{fullhash}{2a131e0a06f9f3fb3155ab8e63ee5dac}
+      \strng{bibnamehash}{2a131e0a06f9f3fb3155ab8e63ee5dac}
+      \strng{authorbibnamehash}{2a131e0a06f9f3fb3155ab8e63ee5dac}
+      \strng{authornamehash}{2a131e0a06f9f3fb3155ab8e63ee5dac}
+      \strng{authorfullhash}{2a131e0a06f9f3fb3155ab8e63ee5dac}
+      \field{labelalpha}{H.T.T.}
+      \field{sortinit}{H}
+      \field{sortinithash}{5f15a7bc777ad49ff15aa4d2831b1681}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{shorthand}{H.T.T.}
+      \field{title}{D-modules, perverse sheaves, and representation theory}
+      \field{volume}{236}
+      \field{year}{2007}
+    \endentry
+    \entry{milne}{book}{}
+      \name{author}{1}{}{%
+        {{hash=1c48e53e44d3122db018aff3b6321bd6}{%
+           family={Milne},
+           familyi={M\bibinitperiod},
+           given={J.\bibnamedelimi S.},
+           giveni={J\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{1c48e53e44d3122db018aff3b6321bd6}
+      \strng{fullhash}{1c48e53e44d3122db018aff3b6321bd6}
+      \strng{bibnamehash}{1c48e53e44d3122db018aff3b6321bd6}
+      \strng{authorbibnamehash}{1c48e53e44d3122db018aff3b6321bd6}
+      \strng{authornamehash}{1c48e53e44d3122db018aff3b6321bd6}
+      \strng{authorfullhash}{1c48e53e44d3122db018aff3b6321bd6}
+      \field{labelalpha}{M17}
+      \field{sortinit}{M}
+      \field{sortinithash}{cfd219b90152c06204fab207bc6c7cab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{series}{Cambridge Studies in Advanced Mathematics}
+      \field{shorthand}{M17}
+      \field{title}{Algebraic Groups: The Theory of Group Schemes of Finite Type over a Field}
+      \field{year}{2017}
+      \verb{doi}
+      \verb 10.1017/9781316711736
+      \endverb
+    \endentry
+    \entry{Zhu-16}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=6f82c47673a7e51ae1c82742466e8cc0}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Xinwen},
+           giveni={X\bibinitperiod}}}%
+      }
+      \strng{namehash}{6f82c47673a7e51ae1c82742466e8cc0}
+      \strng{fullhash}{6f82c47673a7e51ae1c82742466e8cc0}
+      \strng{bibnamehash}{6f82c47673a7e51ae1c82742466e8cc0}
+      \strng{authorbibnamehash}{6f82c47673a7e51ae1c82742466e8cc0}
+      \strng{authornamehash}{6f82c47673a7e51ae1c82742466e8cc0}
+      \strng{authorfullhash}{6f82c47673a7e51ae1c82742466e8cc0}
+      \field{labelalpha}{Zhu16}
+      \field{sortinit}{Z}
+      \field{sortinithash}{156173bd08b075d7295bc3e0f4735a04}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{An introduction to affine Grassmannians and the geometric Satake equivalence}
+      \field{year}{2016}
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/1603.05593
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/1603.05593
+      \endverb
+    \endentry
+  \enddatalist
+  \missing{Zhu-17}
+\endrefsection
+\endinput
+
