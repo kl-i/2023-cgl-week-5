@@ -525,6 +525,8 @@ Finally, we now have a definition of the spherical Hecke category.
   $\SPH_G := (D\MOD \GR_G)^{L^+ G}$
 \end{dfn}
 
+\section{Structure of $\SPH_G$}
+
 Given a closed subvariety $X$ of $\GR_G$ which is $L^+G$-stable,
 it must be a union
 \[
@@ -552,12 +554,85 @@ we deduce
   \end{align*}
 \end{prop}
 
-TODO :
+Let us also address convolution with a bit more detail.
+Goal : construct a functor 
+\[
+  \_ * \_ : \SPH_G \times \SPH_G \to \SPH_G
+\]
+This should come from the diagram : 
+\begin{cd}
+  {\GR_G \times \GR_G} & {LG \times \GR_G} & {LG \times^{L^+ G} \GR_G} & {\GR_G}
+	\arrow["p"', from=1-2, to=1-1]
+	\arrow["q", from=1-2, to=1-3]
+	\arrow["m", from=1-3, to=1-4]
+\end{cd}
+The morphism $q$ is a $L^+G$-torsor so it should induce an equivalence
+\[
+  q^* : D\MOD(LG \times^{L^+ G} \GR_G)^{L^+G} \map{\sim}{}
+  D\MOD(LG \times \GR_G)^{L^+ G \times L^+ G}
+\]
+Given two arc group equivariant $D$-modules $\cF , \cG$ on $\GR_G$,
+$\cF \boxtimes \cG$ is $L^+G \times L^+G$ equivariant.
+Since $p$ is $L^+G \times L^+G $ equivariant,
+we have $p^*(\cF \boxtimes \cG)$ is $L^+G \times L^+G$
+and hence it descends along $q$ to give an arc group equivariant
+$D$-module $(q^*)^{-1}p^*(\cF \boxtimes \cG)$ on $L G \times^{L^+G} \GR_G$.
+Finally, we can !-pushforward along $m$.
+All in all, the formula is 
+\[
+  \cF * \cG := m_!(q^*)^{-1}p^*(\cF \boxtimes \cG)
+\]
+Here are some problems of the above argument : 
+\begin{enumerate}
+  \item $LG \times \GR_G$ is \emph{not} an ind-variety
+  so we technically don't know how to do $D$-modules on it!
+  \item does $m_!$ preserve $L^+G$-equivariance? (The answer is yes!)
+\end{enumerate}
+We present a fix for (1).
+\cite[Section 9.2]{A21}
+Let $\cF , \cG \in \SPH_G$.
+Then we can find $Y, Z$ closed projective subvarieties of $\GR_G$ such that
 \begin{itemize}
-  \item the technical issues with defining convolution
-  \item the fix
-  \item the sketch of proof that $\SPH_G$ is semi-simple
+  \item $Y, Z$ are stable under $L^+G$
+  \item $L^+G$ acts on $Y$ through a finite type quotient $H$.
 \end{itemize}
+Let $K = \ker(L^+G \to H)$. Then
+\begin{cd}
+  & {LG / K} & {\tilde{Y}} \\
+	{\GR_G} & {LG / L^+ G} & Y
+	\arrow["\simeq"{description}, draw=none, from=2-1, to=2-2]
+	\arrow["{H\text{-torsor}}"', from=1-2, to=2-2]
+	\arrow[from=2-3, to=2-2]
+	\arrow[from=1-3, to=1-2]
+	\arrow["{H\text{-torsor}}", from=1-3, to=2-3]
+	\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=-90}, draw=none, from=1-3, to=2-2]
+\end{cd}
+It follows that $\tilde{Y}$ is also a variety.
+Then we can define $\cF * \cG := m_!(q^*)^{-1}p^*(\cF \boxtimes \cG)$ 
+by the diagram 
+\begin{cd}
+  {Y \times Z} & {\tilde{Y} \times Z} & {\tilde{Y} \times^H Z} & {\GR_G}
+	\arrow["p"', from=1-2, to=1-1]
+	\arrow["q", from=1-2, to=1-3]
+	\arrow["m", from=1-3, to=1-4]
+\end{cd}
+This makes sense because all the spaces are now ind-varieties.
+
+One can show that $\cF * \cG$ is semisimple.
+Even better, we have 
+\begin{prop}
+  
+  $\SPH_G$ is semi-simple.
+\end{prop}
+% \begin{proof}(Sketch)
+%   This uses the following result of Lusztig.
+%   \begin{lem}
+%     Let $i : \overline{\GR_G^\la} \setminus \GR_G^\la \to \overline{\GR_G^\la}$
+%     where $\la \in \mathbf{X}_\bullet(T)^+$.
+%     Then $i^!\mathrm{IC}_\la$ lives in homological degree $\geq 2$.
+%   \end{lem}
+  
+% \end{proof}
 
 \section{Appendix : Affine Grassmannian for $\GL_n$}
 \label{appendix:1}
@@ -756,7 +831,7 @@ without working at the level of $k$-valued points.
 As discussed with Jonas, 
 since $D$-modules do not see the difference between
 schemes and their reduction,
-this is purely aesthetical.
+this is purely a matter of taste.
 
 \begin{dfn}
 
